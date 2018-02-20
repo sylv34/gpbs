@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GestionSite</class>
+ <widget class="QDialog" name="GestionSite">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>656</width>
+    <height>609</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestion de sites</string>
+  </property>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
