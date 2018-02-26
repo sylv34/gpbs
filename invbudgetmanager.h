@@ -1,8 +1,8 @@
 #ifndef INVBUDGETMANAGER_H
 #define INVBUDGETMANAGER_H
+#include "budgetmanager.h"
 
-
-class InvBudgetManager
+class InvBudgetManager : public BudgetManager
 {
 public:
     InvBudgetManager();

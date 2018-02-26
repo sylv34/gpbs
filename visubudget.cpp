@@ -77,9 +77,9 @@ void VisuBudget::on_supprimerFF_clicked()
 
     if(!selectionList.isEmpty()){
         int confirmation = QMessageBox::question(this, "Confirmation", "Etes-vous sur de vouloir supprimer cette charge ?", QMessageBox::Yes|QMessageBox::No);
-        if(confirmation){
+        if(confirmation==QMessageBox::Yes){
             int id=selectionList.value(0).data().toInt();
-            manager->supprimerFF(id);
+            manager->supprimerItem(id);
             QMessageBox::information(this,"Charge supprimée", "La charge à bien été supprimée");
         }
     }else{
@@ -117,8 +117,26 @@ void VisuBudget::on_modifierInv_clicked()
         {
             data.push_back(index.data().toString());
         }
-        ModInv modifierInv(data[0].toInt(),data[1],data[2].toInt(),data[3].toInt(),data[4],this);
+
+        ModInv modifierInv(data[0].toInt(),manager->recupNom(data[0].toInt()),data[1].toInt(),data[2].toInt(),data[3],this);
         modifierInv.exec();
+    }else{
+        QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");
+    }
+}
+
+void VisuBudget::on_supprimerInv_clicked()
+{
+    QItemSelectionModel *selection = ui->viewFFDetails->selectionModel();
+    QModelIndexList selectionList = selection->selectedIndexes();
+
+    if(!selectionList.isEmpty()){
+        int confirmation = QMessageBox::question(this, "Confirmation", "Etes-vous sur de vouloir supprimer cet investissement ?", QMessageBox::Yes|QMessageBox::No);
+        if(confirmation==QMessageBox::Yes){
+            int id=selectionList.value(0).data().toInt();
+            manager->supprimerItem(id);
+            QMessageBox::information(this,"Charge supprimée", "La charge à bien été supprimée");
+        }
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");
     }

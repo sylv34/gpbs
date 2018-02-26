@@ -38,7 +38,11 @@ SOURCES += \
     ajoutff.cpp \
     modff.cpp \
     ajoutinv.cpp \
-    modinv.cpp
+    modinv.cpp \
+    materielmanager.cpp \
+    budgetmanager.cpp \
+    invbudgetmanager.cpp \
+    ffbudgetmanager.cpp
 
 HEADERS += \
         gppbs.h \
@@ -54,7 +58,11 @@ HEADERS += \
     ajoutff.h \
     modff.h \
     ajoutinv.h \
-    modinv.h
+    modinv.h \
+    materielmanager.h \
+    budgetmanager.h \
+    invbudgetmanager.h \
+    ffbudgetmanager.h
 
 FORMS += \
         gppbs.ui \

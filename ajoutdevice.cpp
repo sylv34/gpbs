@@ -9,7 +9,7 @@ AjoutDevice::AjoutDevice(QWidget *parent) :
     ui(new Ui::AjoutDevice)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new MaterielManager;
     std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
@@ -37,7 +37,7 @@ AjoutDevice::~AjoutDevice()
 
 void AjoutDevice::on_ajouter_clicked()
 {
-    manager->ajouterDevice(ui->nomAjout->text(),ui->typeAjout->currentText(),ui->fabriquantAjout->text(),ui->modeleAjout->text(),ui->SNAjout->text(),ui->IPAjout->text(),ui->utilisationAjout->currentText() ,ui->precisionAjout->toPlainText(),ui->siteAjout->currentText());
+    manager->ajouterItem(ui->nomAjout->text(),ui->typeAjout->currentIndex(),ui->fabriquantAjout->text(),ui->modeleAjout->text(),ui->SNAjout->text(),ui->IPAjout->text(),ui->utilisationAjout->currentIndex(),ui->precisionAjout->toPlainText(),ui->siteAjout->currentIndex());
     QMessageBox::information(this, "Enregistrer", "Materiel enregistré");
     close();
 }

@@ -21,7 +21,7 @@ public:
     void liste_budget(QStandardItemModel *model);
     void recupID(QString nomSite, QString nomType, QString nomUtilisation);
     int getId(QString type, QString nom);
-    QString ajouterDevice(QString nom, QString nomType, QString fabriquant, QString modele, QString numSerie, QString ip, QString nomUtilisation, QString precision, QString nomSite);
+    void ajouterItem(QString nom,int site);
     void modifierDevice(int id, QString nom, QString nomUtilisation, QString nomType, QString fabriquant, QString modele, QString num, QString ip, QString precision, QString nomSite);
     void supprimerDevice(int id);
     std::vector<QString> remplissageCombo(QString table,QString colonne);
@@ -30,10 +30,11 @@ public:
     void ajoutCharge(QString nom, double coutAnnuel, QString frequence, QString nature, QString commentaire,QString nomSite);
     void modifCharge(int id, QString nom, double coutAnnuel, QString frequence, QString nature, QString commentaire);
     QString recupNom(int id);
-    void supprimerFF(int id);
+    void supprimerItem(int id);
     void ajouterInv(QString nomSite, QString nom, QString commentaire, int coutEstime, int idType);
+    void modifInv(int id,QString nom,int estimationCout,int type, QString commentaire);
 
-private:
+protected:
     bool connecter=false;
     QSqlQuery *query;
 };

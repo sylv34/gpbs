@@ -14,6 +14,10 @@ INPUT(
 ./debug\modff.o
 ./debug\ajoutinv.o
 ./debug\modinv.o
+./debug\materielmanager.o
+./debug\budgetmanager.o
+./debug\invbudgetmanager.o
+./debug\ffbudgetmanager.o
 ./debug\moc_gppbs.o
 ./debug\moc_connexion.o
 ./debug\moc_gestionparc.o

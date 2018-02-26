@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
-#include "manager.h"
+#include "MaterielManager.h"
 
 namespace Ui {
 class GestionParc;
@@ -30,7 +30,7 @@ private slots:
 private:
     Ui::GestionParc *ui;
     QStandardItemModel *model;
-    Manager *manager;
+    MaterielManager *manager;
 };
 
 #endif // GESTIONPARC_H

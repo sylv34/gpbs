@@ -14,6 +14,10 @@ INPUT(
 ./release\modff.o
 ./release\ajoutinv.o
 ./release\modinv.o
+./release\materielmanager.o
+./release\budgetmanager.o
+./release\invbudgetmanager.o
+./release\ffbudgetmanager.o
 ./release\moc_gppbs.o
 ./release\moc_connexion.o
 ./release\moc_gestionparc.o

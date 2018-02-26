@@ -49,34 +49,6 @@ bool Manager::verif_user(QString nom, QString mdp)
 
 //------------GESTION DE PARC --------------
 
-void Manager::liste_device(QStandardItemModel *model)
-{
-
-    query->prepare("SELECT m.id, i.nom, t.libelle, m.fabriquant, m.modele, m.numSerie, m.ip, u.libelle, precisionUtilisation, s.nom, s.ville"
-                  " FROM materiel m"
-                  " INNER JOIN ITEM i ON i.id=m.id"
-                  " INNER JOIN TYPE t ON m.id_TYPE=t.id"
-                  " INNER JOIN SITE s ON i.id_SITE= s.id"
-                  " INNER JOIN UTILISATION u ON m.id_UTILISATION=u.id"
-                  " ORDER BY id_TYPE");
-    query->exec();
-    int i(0);
-    while (query->next()) {
-        model->setItem(i,0,new QStandardItem(query->value(0).toString()));
-        model->setItem(i,1,new QStandardItem(query->value(1).toString()));
-        model->setItem(i,2,new QStandardItem(query->value(2).toString()));
-        model->setItem(i,3,new QStandardItem(query->value(3).toString()));
-        model->setItem(i,4,new QStandardItem(query->value(4).toString()));
-        model->setItem(i,5,new QStandardItem(query->value(5).toString()));
-        model->setItem(i,6,new QStandardItem(query->value(6).toString()));
-        model->setItem(i,7,new QStandardItem(query->value(7).toString()));
-        model->setItem(i,8,new QStandardItem(query->value(8).toString()));
-        model->setItem(i,9,new QStandardItem(query->value(9).toString()));
-        model->setItem(i,10,new QStandardItem(query->value(10).toString()));
-        i++;
-    }
-}
-
 int Manager::getId(QString type, QString nom)
 {
     query->prepare("SET @id_"+type+"=0;");
@@ -92,32 +64,23 @@ int Manager::getId(QString type, QString nom)
     {
         return query->value(0).toInt();
     }
-
 }
-
-QString Manager::ajouterDevice(QString nom, QString nomType, QString fabriquant, QString modele, QString numSerie, QString ip, QString nomUtilisation, QString precision, QString nomSite)
+void Manager::ajouterItem(QString nom, int site)
 {
-    getId("type",nomType);
-    getId("utilisation", nomUtilisation);
-    getId("site", nomSite);
 
-    query->prepare("INSERT INTO ITEM(nom, id_SITE) VALUES (:nom, @id_SITE)");
+    query->prepare("INSERT INTO ITEM(nom, id_SITE) VALUES (:nom, :site)");
     query->bindValue(":nom", nom);
+    query->bindValue(":site", site);
     query->exec();
 
-    query->prepare("CALL recup_id_item(:nom, @id_SITE, @id_ITEM);");
+    query->prepare("SET @id_ITEM=0;");
+    query->exec();
+
+    query->prepare("CALL recup_id_item(:nom, :site, @id_ITEM);");
     query->bindValue(":nom", nom);
+    query->bindValue(":site", site);
     query->exec();
 
-    query->prepare("INSERT INTO materiel"
-                   " VALUES(@id_ITEM, @id_TYPE, :fabriquant, :modele, :numserie, :ip, @id_UTILISATION, :precision)");
-    query->bindValue(":fabriquant", fabriquant);
-    query->bindValue(":modele", modele);
-    query->bindValue(":numserie", numSerie);
-    query->bindValue(":ip", ip);
-    query->bindValue(":precision", precision);
-    query->exec();
-    return query->lastError().text();
 }
 void Manager::modifierDevice(int id, QString nom, QString nomType, QString fabriquant, QString modele, QString numSerie, QString ip, QString nomUtilisation, QString precision, QString nomSite)
 {
@@ -136,16 +99,6 @@ void Manager::modifierDevice(int id, QString nom, QString nomType, QString fabri
     query->bindValue(":num", numSerie);
     query->bindValue(":ip", ip);
     query->bindValue(":precision", precision);
-    query->bindValue(":id", id);
-    query->exec();
-}
-void Manager::supprimerDevice(int id)
-{
-    query->prepare("DELETE FROM MATERIEL WHERE id=:id");
-    query->bindValue(":id", id);
-    query->exec();
-
-    query->prepare("DELETE FROM ITEM WHERE id=:id");
     query->bindValue(":id", id);
     query->exec();
 }
@@ -171,7 +124,6 @@ void Manager::liste_budget(QStandardItemModel *model)
         i++;
     }
 }
-
 void Manager::liste_detail_budgetFF(QString site, QStandardItemModel *model)
 {
     query->prepare("SELECT i.id, coutAnnuel, f.libelle, n.libelle, b.commentaire,f.coefMulti "
@@ -269,13 +221,6 @@ void Manager::modifCharge(int id, QString nom, double coutAnnuel, QString freque
     query->bindValue(":id", id);
     query->exec();
 }
-void Manager::supprimerFF(int id)
-    {
-        query->prepare("DELETE FROM ITEM WHERE id=:id");
-        query->bindValue(":id", id);
-        query->exec();
-    }
-
 void Manager::ajouterInv(QString nomSite, QString nom, QString commentaire, int coutEstime, int idType){
     getId("site",nomSite);
 
@@ -300,10 +245,37 @@ void Manager::ajouterInv(QString nomSite, QString nom, QString commentaire, int 
     query->bindValue(":coutEstime",coutEstime);
     query->bindValue(":idType", idType);
     query->exec();
+    std::cout<<q2c(query->lastError().text());
 
 }
+void Manager::modifInv(int id,QString nom,int estimationCout,int type, QString commentaire){
+
+    query->prepare("UPDATE ITEM SET nom=:nom WHERE id=:id");
+    query->bindValue(":id", id);
+    query->bindValue(":nom",nom);
+    query->exec();
+
+    query->prepare("UPDATE BUDGET SET commentaire=:commentaire WHERE id=:id");
+    query->bindValue(":commentaire", commentaire);
+    query->bindValue(":id", id);
+    query->exec();
+
+    query->prepare("UPDATE INVESTISSEMENT SET estimationCout=:cout, id_TYPE=:type"
+                   " WHERE id=:id");
+    query->bindValue(":cout", estimationCout);
+    query->bindValue(":type", type);
+    query->bindValue(":id", id);
+    query->exec();
+}
+
 //------------ AUTRE --------------
 
+void Manager::supprimerItem(int id)
+    {
+        query->prepare("DELETE FROM ITEM WHERE id=:id");
+        query->bindValue(":id", id);
+        query->exec();
+    }
 std::vector<QString> Manager::remplissageCombo(QString colonne, QString table){
     query->prepare("SELECT "+colonne+" FROM "+table);
     query->exec();

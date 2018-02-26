@@ -2,7 +2,7 @@
 #define AJOUTDEVICE_H
 
 #include <QDialog>
-#include "manager.h"
+#include "MaterielManager.h"
 
 namespace Ui {
 class AjoutDevice;
@@ -23,7 +23,7 @@ private slots:
 
 private:
     Ui::AjoutDevice *ui;
-    Manager *manager;
+    MaterielManager *manager;
 };
 
 #endif // AJOUTDEVICE_H

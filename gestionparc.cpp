@@ -9,7 +9,7 @@ GestionParc::GestionParc(QWidget *parent) :
     ui(new Ui::GestionParc)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new MaterielManager;
     model = new QStandardItemModel;
     setFixedSize(QApplication::desktop()->availableGeometry(this).width(),QApplication::desktop()->availableGeometry(this).height());
     afficherListe();
@@ -82,7 +82,7 @@ void GestionParc::on_supprimer_clicked()
        if(confirmation==QMessageBox::Yes)
        {
            int id=selectionList.value(0).data().toInt();
-           manager->supprimerDevice(id);
+           manager->supprimerItem(id);
            QMessageBox::information(this, "Suppression", "Materiel supprimé");
        }
 

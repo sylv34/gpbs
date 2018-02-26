@@ -35,6 +35,8 @@ private slots:
 
     void on_modifierInv_clicked();
 
+    void on_supprimerInv_clicked();
+
 private:
     Ui::VisuBudget *ui;
     QStandardItemModel *modelFF;

@@ -17,6 +17,11 @@ public:
     explicit ModInv(int id,QString nom,int estimationCout,int type, QString commentaire, QWidget *parent=0);
     ~ModInv();
 
+private slots:
+    void on_retour_clicked();
+
+    void on_modifier_clicked();
+
 private:
     Ui::ModInv *ui;
     Manager *manager;
