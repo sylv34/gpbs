@@ -8,7 +8,7 @@ GestionBudget::GestionBudget(QWidget *parent) :
     ui(new Ui::GestionBudget)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new BudgetManager;
     model = new QStandardItemModel;
     totFF= new int;
     totInv= new int;
@@ -54,7 +54,7 @@ void GestionBudget::on_detail_clicked()
         {
             data.push_back(index.data().toString());
         }
-        VisuBudget budget(data[0],this);
+        VisuBudget budget(manager->getId("site",data[0]),this);
         budget.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");

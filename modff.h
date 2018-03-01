@@ -2,7 +2,7 @@
 #define MODFF_H
 
 #include <QDialog>
-#include "manager.h"
+#include "ffbudgetmanager.h"
 
 namespace Ui {
 class ModFF;
@@ -14,7 +14,7 @@ class ModFF : public QDialog
 
 public:
     explicit ModFF(QWidget *parent = 0);
-    explicit ModFF(QString id,QString nom,QString coutAnnuel,QString frequence,QString nature,QString commentaire,QWidget *parent);
+    explicit ModFF(int id,QString nom,double coutAnnuel,int frequence,int nature,QString commentaire,int IdSite,QWidget *parent);
     ~ModFF();
 
 private slots:
@@ -22,7 +22,8 @@ private slots:
 
 private:
     Ui::ModFF *ui;
-    Manager *manager;
+    FFBudgetManager *manager;
+    int site;
 };
 
 #endif // MODFF_H

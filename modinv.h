@@ -2,7 +2,7 @@
 #define MODINV_H
 
 #include <QDialog>
-#include "manager.h"
+#include "invbudgetmanager.h"
 
 namespace Ui {
 class ModInv;
@@ -14,7 +14,7 @@ class ModInv : public QDialog
 
 public:
     explicit ModInv(QWidget *parent = 0);
-    explicit ModInv(int id,QString nom,int estimationCout,int type, QString commentaire, QWidget *parent=0);
+    explicit ModInv(int id,QString nom,int estimationCout,int type, QString commentaire, int IdSite,QWidget *parent=0);
     ~ModInv();
 
 private slots:
@@ -24,7 +24,8 @@ private slots:
 
 private:
     Ui::ModInv *ui;
-    Manager *manager;
+    InvBudgetManager *manager;
+    int site;
 };
 
 #endif // MODINV_H

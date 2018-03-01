@@ -6,15 +6,15 @@ AjoutFF::AjoutFF(QWidget *parent) :
     ui(new Ui::AjoutFF)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new FFBudgetManager;
 }
-AjoutFF::AjoutFF(QString nomSite, QWidget *parent) :
+AjoutFF::AjoutFF(int IdSite, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AjoutFF)
 {
     ui->setupUi(this);
-    manager = new Manager;
-    site=nomSite;
+    manager = new FFBudgetManager;
+    site=IdSite;
 
     std::vector<QString> combo=manager->remplissageCombo("libelle","FREQUENCE");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
@@ -35,7 +35,7 @@ AjoutFF::~AjoutFF()
 
 void AjoutFF::on_pushButton_clicked()
 {
-    manager->ajoutCharge(ui->nom->text(), ui->coutAnnuel->value(),ui->frequence->currentText(),ui->nature->currentText(), ui->commentaire->toPlainText(), site);
+    manager->ajouterItem(ui->nom->text(), ui->coutAnnuel->value(),ui->frequence->currentIndex(),ui->nature->currentIndex(), ui->commentaire->toPlainText(), site);
     QMessageBox::information(this, "Enregistrer", "Materiel enregistré");
     close();
 }

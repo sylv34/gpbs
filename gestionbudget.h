@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
-#include "manager.h"
+#include "budgetmanager.h"
 
 namespace Ui {
 class GestionBudget;
@@ -26,7 +26,7 @@ private slots:
 private:
     Ui::GestionBudget *ui;
     QStandardItemModel *model;
-    Manager *manager;
+    BudgetManager *manager;
     int *totFF;
     int *totInv;
 };

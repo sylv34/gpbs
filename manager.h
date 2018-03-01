@@ -17,18 +17,13 @@ public:
     bool etat_connexion();
     void connexionBase();
     bool verif_user(QString nom, QString mdp);
-    void liste_device(QStandardItemModel *model);
-    void liste_budget(QStandardItemModel *model);
+
     void recupID(QString nomSite, QString nomType, QString nomUtilisation);
-    int getId(QString type, QString nom);
+    int getId(QString table,QString nom);
     void ajouterItem(QString nom,int site);
-    void modifierDevice(int id, QString nom, QString nomUtilisation, QString nomType, QString fabriquant, QString modele, QString num, QString ip, QString precision, QString nomSite);
-    void supprimerDevice(int id);
+    void modifierItem(int id, QString nom, int nomSite);
     std::vector<QString> remplissageCombo(QString table,QString colonne);
-    void liste_detail_budgetFF(QString site, QStandardItemModel *model);
     void liste_detail_budgetInv(QString site, QStandardItemModel *model);
-    void ajoutCharge(QString nom, double coutAnnuel, QString frequence, QString nature, QString commentaire,QString nomSite);
-    void modifCharge(int id, QString nom, double coutAnnuel, QString frequence, QString nature, QString commentaire);
     QString recupNom(int id);
     void supprimerItem(int id);
     void ajouterInv(QString nomSite, QString nom, QString commentaire, int coutEstime, int idType);

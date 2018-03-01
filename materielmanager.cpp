@@ -45,3 +45,19 @@ void MaterielManager::ajouterItem(QString nom, int type, QString fabriquant, QSt
     query->bindValue(":precision", precision);
     query->exec();
 }
+void MaterielManager::modifierItem(int id, QString nom, int type, QString fabriquant, QString modele, QString numSerie, QString ip, int utilisation, QString precision, int site)
+{
+
+    Manager::modifierItem(id,nom,site);
+
+    query->prepare("UPDATE MATERIEL SET id_TYPE=:type, fabriquant=:fabriquant, modele=:modele, numserie=:num, ip=:ip, id_UTILISATION=:utilisation, precisionUtilisation=:precision WHERE id=:id;");
+    query->bindValue(":fabriquant", fabriquant);
+    query->bindValue(":modele", modele);
+    query->bindValue(":num", numSerie);
+    query->bindValue(":ip", ip);
+    query->bindValue(":precision", precision);
+    query->bindValue(":utilisation", utilisation);
+    query->bindValue(":type", type);
+    query->bindValue(":id", id);
+    query->exec();
+}

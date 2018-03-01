@@ -8,13 +8,13 @@ AjoutInv::AjoutInv(QWidget *parent) :
 {
     ui->setupUi(this);
 }
-AjoutInv::AjoutInv(QString nomSite, QWidget *parent) :
+AjoutInv::AjoutInv(int IdSite, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AjoutInv)
 {
     ui->setupUi(this);
-    manager = new Manager;
-    site=nomSite;
+    manager = new InvBudgetManager;
+    site=IdSite;
 
     std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
@@ -29,7 +29,7 @@ AjoutInv::~AjoutInv()
 
 void AjoutInv::on_ajouter_clicked()
 {
-    manager->ajouterInv(site,ui->nom->text(),ui->commentaire->toPlainText(),ui->estimationCout->value(),ui->type->currentIndex());
+    manager->ajouterItem(ui->nom->text(),ui->commentaire->toPlainText(),ui->estimationCout->value(),ui->type->currentIndex(),site);
     QMessageBox::information(this, "Enregistrer", "Materiel enregistré");
     close();
 }

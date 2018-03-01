@@ -10,19 +10,19 @@ VisuBudget::VisuBudget(QWidget *parent) :
     ui(new Ui::VisuBudget)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new BudgetManager;
     modelFF = new QStandardItemModel;
     modelInv = new QStandardItemModel;
 }
-VisuBudget::VisuBudget(QString nomSite,QWidget *parent) :
+VisuBudget::VisuBudget(int IdSite,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::VisuBudget)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new BudgetManager;
     modelFF = new QStandardItemModel;
     modelInv = new QStandardItemModel;
-    site=nomSite;
+    site=IdSite;
     afficherFF();
     afficherInv();
 }
@@ -63,7 +63,7 @@ void VisuBudget::on_modifierFF_clicked()
         {
             data.push_back(index.data().toString());
         }
-        ModFF modifierFF(data[0],manager->recupNom(data[0].toInt()),data[1],data[2],data[3],data[4],this);
+        ModFF modifierFF(data[0].toInt(),data[0],data[1].toDouble(),data[2].toInt(),data[3].toInt(),data[4],site,this);
         modifierFF.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");
@@ -118,7 +118,7 @@ void VisuBudget::on_modifierInv_clicked()
             data.push_back(index.data().toString());
         }
 
-        ModInv modifierInv(data[0].toInt(),manager->recupNom(data[0].toInt()),data[1].toInt(),data[2].toInt(),data[3],this);
+        ModInv modifierInv(data[0].toInt(),data[1],data[2].toInt(),data[3].toInt(),data[4],site,this);
         modifierInv.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");

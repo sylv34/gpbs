@@ -2,7 +2,7 @@
 #define MODIFICATIONDEVICE_H
 
 #include <QDialog>
-#include "manager.h"
+#include "materielmanager.h"
 #include "gestionparc.h"
 
 namespace Ui {
@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::ModificationDevice *ui;
-    Manager *manager;
+    MaterielManager *manager;
 };
 
 #endif // MODIFICATIONDEVICE_H

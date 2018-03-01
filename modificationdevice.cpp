@@ -6,14 +6,14 @@ ModificationDevice::ModificationDevice(QWidget *parent) :
     ui(new Ui::ModificationDevice)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new MaterielManager;
 }
 ModificationDevice::ModificationDevice(QString id, QString nom, QString nomType, QString fabriquant, QString modele, QString numSerie, QString ip, QString nomUtilisation, QString precision, QString nomSite, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ModificationDevice)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new MaterielManager;
 
     std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
@@ -33,14 +33,14 @@ ModificationDevice::ModificationDevice(QString id, QString nom, QString nomType,
 
     ui->idMod->setText(id);
     ui->nomMod->setText(nom);
-    ui->typeMod->setCurrentIndex(manager->getId("type", nomType));
+    ui->typeMod->setCurrentIndex(manager->getId("TYPE", nomType));
     ui->fabriquantMod->setText(fabriquant);
     ui->modeleMod->setText(modele);
     ui->SNMod->setText(numSerie);
     ui->IPMod->setText(ip);
-    ui->utilisationMod->setCurrentIndex(manager->getId("utilisation",nomUtilisation));
+    ui->utilisationMod->setCurrentIndex(manager->getId("UTILISATION",nomUtilisation));
     ui->precisionMod->setText(precision);
-    ui->siteMod->setCurrentIndex(manager->getId("site",nomSite));
+    ui->siteMod->setCurrentIndex(manager->getId("SITE",nomSite));
 
 }
 
@@ -51,7 +51,7 @@ ModificationDevice::~ModificationDevice()
 
 void ModificationDevice::on_modifier_clicked()
 {
-    manager->modifierDevice(ui->idMod->text().toInt(),ui->nomMod->text(),ui->typeMod->currentText(),ui->fabriquantMod->text(),ui->modeleMod->text(),ui->SNMod->text(),ui->IPMod->text(),ui->utilisationMod->currentText() ,ui->precisionMod->toPlainText(),ui->siteMod->currentText());
+    manager->modifierItem(ui->idMod->text().toInt(),ui->nomMod->text(),ui->typeMod->currentIndex(),ui->fabriquantMod->text(),ui->modeleMod->text(),ui->SNMod->text(),ui->IPMod->text(),ui->utilisationMod->currentIndex() ,ui->precisionMod->toPlainText(),ui->siteMod->currentIndex());
     QMessageBox::information(this, "Modification", "Materiel modifié");
     close();
 }

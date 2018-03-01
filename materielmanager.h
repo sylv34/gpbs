@@ -17,7 +17,7 @@ public:
     MaterielManager();
     void liste_device(QStandardItemModel *model);
     void ajouterItem(QString nom, int type, QString fabriquant, QString modele, QString numSerie, QString ip, int utilisation, QString precision, int site);
-    void modifier(int id, QString nom, QString nomUtilisation, QString nomType, QString fabriquant, QString modele, QString num, QString ip, QString precision, QString nomSite);
+    void modifierItem(int id, QString nom, int type, QString fabriquant, QString modele, QString numSerie, QString ip, int utilisation, QString precision, int site);
 };
 
 #endif // MATERIELMANAGER_H

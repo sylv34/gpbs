@@ -2,7 +2,7 @@
 #define AJOUTINV_H
 
 #include <QDialog>
-#include "manager.h"
+#include "invbudgetmanager.h"
 
 namespace Ui {
 class AjoutInv;
@@ -14,7 +14,7 @@ class AjoutInv : public QDialog
 
 public:
     explicit AjoutInv(QWidget *parent = 0);
-    explicit AjoutInv(QString nomSite, QWidget *parent=0);
+    explicit AjoutInv(int IdSite, QWidget *parent=0);
     ~AjoutInv();
 
 private slots:
@@ -22,8 +22,8 @@ private slots:
 
 private:
     Ui::AjoutInv *ui;
-    Manager *manager;
-    QString site;
+    InvBudgetManager *manager;
+    int site;
 };
 
 #endif // AJOUTINV_H

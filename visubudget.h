@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QStandardItemModel>
-#include "manager.h"
+#include "budgetmanager.h"
 
 namespace Ui {
 class VisuBudget;
@@ -15,7 +15,7 @@ class VisuBudget : public QDialog
 
 public:
     explicit VisuBudget(QWidget *parent = 0);
-    explicit VisuBudget(QString site,QWidget *parent=0);
+    explicit VisuBudget(int IdSite,QWidget *parent=0);
     ~VisuBudget();
     void afficherFF();
     void afficherInv();
@@ -37,12 +37,12 @@ private slots:
 
     void on_supprimerInv_clicked();
 
-private:
+protected:
     Ui::VisuBudget *ui;
     QStandardItemModel *modelFF;
     QStandardItemModel *modelInv;
-    Manager *manager;
-    QString site;
+    BudgetManager *manager;
+    int site;
 };
 
 #endif // VISUBUDGET_H

@@ -6,14 +6,15 @@ ModInv::ModInv(QWidget *parent) :
     ui(new Ui::ModInv)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new InvBudgetManager;
 }
-ModInv::ModInv(int id,QString nom,int estimationCout,int type, QString commentaire, QWidget *parent) :
+ModInv::ModInv(int id,QString nom,int estimationCout,int type, QString commentaire,int IdSite, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ModInv)
 {
     ui->setupUi(this);
-    manager = new Manager;
+    manager = new InvBudgetManager;
+    site = IdSite;
 
     std::vector<QString> combo=manager->remplissageCombo("libelle","type");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
@@ -40,7 +41,7 @@ void ModInv::on_retour_clicked()
 
 void ModInv::on_modifier_clicked()
 {
-    manager->modifInv(ui->id->text().toInt(),ui->nom->text(),ui->estimationCout->value(),ui->type->currentIndex(), ui->commentaire->toPlainText());
+    manager->modifierItem(ui->id->text().toInt(),ui->nom->text(),ui->estimationCout->value(),ui->type->currentIndex(), ui->commentaire->toPlainText(),site);
     QMessageBox::information(this, "test",ui->id->text()+ui->nom->text()+QString::number(ui->estimationCout->value())+QString::number(ui->type->currentIndex())+ ui->commentaire->toPlainText());
     QMessageBox::information(this,"Modifier","Modification effectuée");
     close();

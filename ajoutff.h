@@ -2,7 +2,7 @@
 #define AJOUTFF_H
 
 #include <QDialog>
-#include "manager.h"
+#include "ffbudgetmanager.h"
 
 namespace Ui {
 class AjoutFF;
@@ -14,7 +14,7 @@ class AjoutFF : public QDialog
 
 public:
     explicit AjoutFF(QWidget *parent = 0);
-    explicit AjoutFF(QString site, QWidget *parent = 0);
+    explicit AjoutFF(int IdSite, QWidget *parent = 0);
     ~AjoutFF();
 
 private slots:
@@ -24,8 +24,8 @@ private slots:
 
 private:
     Ui::AjoutFF *ui;
-    Manager *manager;
-    QString site;
+    FFBudgetManager *manager;
+    int site;
 };
 
 #endif // AJOUTFF_H
