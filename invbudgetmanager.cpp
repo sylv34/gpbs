@@ -5,7 +5,7 @@ InvBudgetManager::InvBudgetManager() : BudgetManager (){}
 
 void InvBudgetManager::ajouterItem(QString nom, QString commentaire, int coutEstime, int idType,int IdSite){
 
-    BudgetManager::ajouterItem(nom,IdSite,commentaire);
+    BudgetManager::ajouterItem(nom,IdSite,commentaire,1);
 
     query->prepare("INSERT INTO INVESTISSEMENT values(@id_ITEM, :coutEstime, :idType)");
     query->bindValue(":coutEstime",coutEstime);

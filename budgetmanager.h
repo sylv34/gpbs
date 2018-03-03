@@ -9,7 +9,7 @@ public:
     void liste_budget(QStandardItemModel *model);
     void liste_detail_budgetInv(int IdSite, QStandardItemModel *model);
     void liste_detail_budgetFF(int site, QStandardItemModel *model);
-    void ajouterItem(QString nom, int site, QString commentaire);
+    void ajouterItem(QString nom, int site, QString commentaire, int IdTypeItem);
     void modifierItem(int id,QString nom, int site, QString commentaire);
 };
 

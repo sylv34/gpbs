@@ -117,8 +117,7 @@ void VisuBudget::on_modifierInv_clicked()
         {
             data.push_back(index.data().toString());
         }
-
-        ModInv modifierInv(data[0].toInt(),data[1],data[2].toInt(),data[3].toInt(),data[4],site,this);
+        ModInv modifierInv(data[0].toInt(),manager->recupNom(data[0].toInt()),data[1].toInt(),data[2].toInt(),data[3],site,this);
         modifierInv.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");
@@ -127,7 +126,7 @@ void VisuBudget::on_modifierInv_clicked()
 
 void VisuBudget::on_supprimerInv_clicked()
 {
-    QItemSelectionModel *selection = ui->viewFFDetails->selectionModel();
+    QItemSelectionModel *selection = ui->viewInvDetails->selectionModel();
     QModelIndexList selectionList = selection->selectedIndexes();
 
     if(!selectionList.isEmpty()){

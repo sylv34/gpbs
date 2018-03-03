@@ -3,7 +3,7 @@
 FFBudgetManager::FFBudgetManager() : BudgetManager (){}
 void FFBudgetManager::ajouterItem(QString nom, double coutAnnuel, int frequence, int nature, QString commentaire, int site){
 
-    BudgetManager::ajouterItem(nom,site,commentaire);
+    BudgetManager::ajouterItem(nom,site,commentaire,0);
 
     query->prepare("INSERT INTO CHARGE values(@id_ITEM, :nature, :frequence, :coutAnnuel)");
     query->bindValue(":nature",nature);

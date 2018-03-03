@@ -33,3 +33,8 @@ void AjoutInv::on_ajouter_clicked()
     QMessageBox::information(this, "Enregistrer", "Materiel enregistré");
     close();
 }
+
+void AjoutInv::on_retour_clicked()
+{
+    close();
+}

@@ -20,6 +20,8 @@ public:
 private slots:
     void on_ajouter_clicked();
 
+    void on_retour_clicked();
+
 private:
     Ui::AjoutInv *ui;
     InvBudgetManager *manager;

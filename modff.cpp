@@ -46,3 +46,8 @@ void ModFF::on_modifier_clicked()
     QMessageBox::information(this,"Modifier","Modification effectuée");
     close();
 }
+
+void ModFF::on_retour_clicked()
+{
+    close();
+}

@@ -20,6 +20,8 @@ public:
 private slots:
     void on_modifier_clicked();
 
+    void on_retour_clicked();
+
 private:
     Ui::ModFF *ui;
     FFBudgetManager *manager;

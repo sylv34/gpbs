@@ -42,7 +42,6 @@ void ModInv::on_retour_clicked()
 void ModInv::on_modifier_clicked()
 {
     manager->modifierItem(ui->id->text().toInt(),ui->nom->text(),ui->estimationCout->value(),ui->type->currentIndex(), ui->commentaire->toPlainText(),site);
-    QMessageBox::information(this, "test",ui->id->text()+ui->nom->text()+QString::number(ui->estimationCout->value())+QString::number(ui->type->currentIndex())+ ui->commentaire->toPlainText());
     QMessageBox::information(this,"Modifier","Modification effectuée");
     close();
 }

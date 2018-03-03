@@ -69,13 +69,14 @@ void BudgetManager::liste_detail_budgetFF(int site, QStandardItemModel *model)
     }
 
 }
-void BudgetManager::ajouterItem(QString nom, int site, QString commentaire){
+void BudgetManager::ajouterItem(QString nom, int site, QString commentaire, int IdTypeItem){
 
     Manager::ajouterItem(nom,site);
 
     query->prepare("INSERT INTO budget "
-                   "VALUES(@id_ITEM, 0, :commentaire)");
+                   "VALUES(@id_ITEM, :typeItem, :commentaire)");
     query->bindValue(":commentaire", commentaire);
+    query->bindValue(":typeItem", IdTypeItem);
     query->exec();
 }
 void BudgetManager::modifierItem(int id,QString nom, int site, QString commentaire){
