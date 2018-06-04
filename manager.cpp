@@ -21,8 +21,6 @@ void Manager::connexionBase()
     if(db.open())
     {
        connecter=true;
-       query->prepare("SELECT * FROM ITEM");
-       query->exec();
     }
 }
 bool Manager::etat_connexion()

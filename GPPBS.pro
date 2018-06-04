@@ -42,7 +42,10 @@ SOURCES += \
     materielmanager.cpp \
     budgetmanager.cpp \
     invbudgetmanager.cpp \
-    ffbudgetmanager.cpp
+    ffbudgetmanager.cpp \
+    sitemanager.cpp \
+    visusite.cpp \
+    ajoutsite.cpp
 
 HEADERS += \
         gppbs.h \
@@ -62,7 +65,10 @@ HEADERS += \
     materielmanager.h \
     budgetmanager.h \
     invbudgetmanager.h \
-    ffbudgetmanager.h
+    ffbudgetmanager.h \
+    sitemanager.h \
+    visusite.h \
+    ajoutsite.h
 
 FORMS += \
         gppbs.ui \
@@ -77,4 +83,6 @@ FORMS += \
     ajoutff.ui \
     modff.ui \
     ajoutinv.ui \
-    modinv.ui
+    modinv.ui \
+    visusite.ui \
+    ajoutsite.ui

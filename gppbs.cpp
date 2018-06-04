@@ -18,7 +18,7 @@ GPPBS::GPPBS(QWidget *parent) :
         dialConnexion.exec();
     }else{
         QMessageBox::critical(this,"Base de donnée", "Connection à la base échoué ! Relancez l'application");
-        exit(1);
+        //exit(1);
     }
 }
 

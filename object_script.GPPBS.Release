@@ -18,6 +18,9 @@ INPUT(
 ./release\budgetmanager.o
 ./release\invbudgetmanager.o
 ./release\ffbudgetmanager.o
+./release\sitemanager.o
+./release\visusite.o
+./release\ajoutsite.o
 ./release\moc_gppbs.o
 ./release\moc_connexion.o
 ./release\moc_gestionparc.o
@@ -31,4 +34,6 @@ INPUT(
 ./release\moc_modff.o
 ./release\moc_ajoutinv.o
 ./release\moc_modinv.o
+./release\moc_visusite.o
+./release\moc_ajoutsite.o
 );

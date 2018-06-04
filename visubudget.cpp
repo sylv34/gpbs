@@ -26,9 +26,6 @@ VisuBudget::VisuBudget(int IdSite,QWidget *parent) :
     afficherFF();
     afficherInv();
 }
-
-/*------Frais de fonctionnement-------*/
-
 void VisuBudget::afficherFF(){
 
     manager->liste_detail_budgetFF(site, modelFF);

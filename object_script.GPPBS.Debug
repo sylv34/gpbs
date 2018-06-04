@@ -18,6 +18,9 @@ INPUT(
 ./debug\budgetmanager.o
 ./debug\invbudgetmanager.o
 ./debug\ffbudgetmanager.o
+./debug\sitemanager.o
+./debug\visusite.o
+./debug\ajoutsite.o
 ./debug\moc_gppbs.o
 ./debug\moc_connexion.o
 ./debug\moc_gestionparc.o
@@ -31,4 +34,6 @@ INPUT(
 ./debug\moc_modff.o
 ./debug\moc_ajoutinv.o
 ./debug\moc_modinv.o
+./debug\moc_visusite.o
+./debug\moc_ajoutsite.o
 );
