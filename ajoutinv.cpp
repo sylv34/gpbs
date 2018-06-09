@@ -16,7 +16,7 @@ AjoutInv::AjoutInv(int IdSite, QWidget *parent) :
     manager = new InvBudgetManager;
     site=IdSite;
 
-    std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
+    std::vector<QString> combo=manager->remplissageCombo("libelle","type");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->type->addItem(*it);

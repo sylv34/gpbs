@@ -22,7 +22,7 @@ void GestionSite::afficherListe(){
     model->setHeaderData(3,Qt::Horizontal,"CP");
     model->setHeaderData(4,Qt::Horizontal,"VILLE");
     model->setHeaderData(5,Qt::Horizontal,"SIREN");
-    model->setHeaderData(6,Qt::Horizontal,"SIRET");
+    model->setHeaderData(6,Qt::Horizontal,"NIC");
     ui->viewSite->setModel(model);
 
 }
@@ -51,5 +51,24 @@ void GestionSite::on_detail_clicked()
 
 void GestionSite::on_ajouter_clicked()
 {
+    AjoutSite fenAjout(this);
+    fenAjout.exec();
+}
 
+void GestionSite::on_modifier_clicked()
+{
+    QItemSelectionModel *selection = ui->viewSite->selectionModel();
+    QModelIndexList selectionList = selection->selectedIndexes();
+    if(!selectionList.isEmpty()){
+        std::vector<QVariant> data;
+        foreach (QModelIndex index, selectionList)
+        {
+            data.push_back(index.data());
+        }
+        ModifSite fenModif(data[0].toInt(),data[1].toString(),data[2].toString(),data[3].toString(),data[4].toString(),data[5].toString(), data[6].toString(),this);
+        fenModif.exec();
+        afficherListe();
+    }else{
+       QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour modification");
+   }
 }

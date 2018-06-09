@@ -11,16 +11,22 @@ Manager::Manager()
     query =  new QSqlQuery;
 
 }
+QString Manager::sqlErreur(QSqlQuery *query, QString methode, QString classe){
+    return (!query->exec())? classe+"::"+methode+" "+query->lastError().text() :"";
+}
 void Manager::connexionBase()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");
-    db.setUserName("root");
+    db.setHostName("192.168.30.1");
+    db.setUserName("user");
     db.setPassword("root");
-    db.setDatabaseName("GPBS");
+    db.setDatabaseName("gpbs");
     if(db.open())
     {
        connecter=true;
+
+    }else{
+        std::cout << "Une erreur s'est produite à la connexion :" << std::endl << q2c(query->lastError().text()) << std::endl;
     }
 }
 bool Manager::etat_connexion()
@@ -29,10 +35,10 @@ bool Manager::etat_connexion()
 }
 bool Manager::verif_user(QString nom, QString mdp)
 {
-    query->prepare("SELECT * FROM UTILISATEUR WHERE Nom=:nom AND mdp=:mdp");
+    query->prepare("SELECT * FROM utilisateur WHERE Nom=:nom AND mdp=:mdp");
     query->bindValue(":nom", nom);
     query->bindValue(":mdp", mdp);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"verif_user", "Manager"));
     if(query->next())
     {
         return true;
@@ -43,14 +49,14 @@ bool Manager::verif_user(QString nom, QString mdp)
 int Manager::getId(QString table,QString nom)
 {
     query->prepare("SET @id_"+table+"=0;");
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"getId>SET id", "Manager"));
 
     query->prepare("CALL recup_id_"+table+"(:nom, @id_"+table+");");
     query->bindValue(":nom", nom);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"getId>Call", "Manager"));
 
     query->prepare("SELECT @id_"+table+";");
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"getId>select", "Manager"));
     if(query->next())
     {
         return query->value(0).toInt();
@@ -59,9 +65,9 @@ int Manager::getId(QString table,QString nom)
     }
 }
 QString Manager::recupNom(int id){
-    query->prepare("SELECT nom FROM ITEM WHERE id=:id");
+    query->prepare("SELECT nom FROM item WHERE id=:id");
     query->bindValue(":id",id);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"recupNom", "Manager"));
     QString nom;
     while(query->next()){
      nom= query->value(0).toString();
@@ -70,7 +76,7 @@ QString Manager::recupNom(int id){
 }
 std::vector<QString> Manager::remplissageCombo(QString colonne, QString table){
     query->prepare("SELECT "+colonne+" FROM "+table);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"remplissageCombo", "Manager"));
     std::vector<QString> v;
     while(query->next()){
         v.push_back(query->value(0).toString());
@@ -80,33 +86,33 @@ std::vector<QString> Manager::remplissageCombo(QString colonne, QString table){
 void Manager::ajouterItem(QString nom, int site)
 {
 
-    query->prepare("INSERT INTO ITEM(nom, id_SITE) VALUES (:nom, :site)");
+    query->prepare("INSERT INTO item(nom, id_SITE) VALUES (:nom, :site)");
     query->bindValue(":nom", nom);
     query->bindValue(":site", site);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"ajouterItem>insert", "Manager"));
 
     query->prepare("SET @id_ITEM=0;");
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"ajouterItem>set id", "Manager"));
 
     query->prepare("CALL recup_id_item(:nom, :site, @id_ITEM);");
     query->bindValue(":nom", nom);
     query->bindValue(":site", site);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"ajouterItem > recupid", "Manager"));
 
 }
 void Manager::modifierItem(int id, QString nom, int site)
 {
-    query->prepare("UPDATE ITEM SET nom=:nom, id_SITE=:site WHERE id=:id");
+    query->prepare("UPDATE item SET nom=:nom, id_SITE=:site WHERE id=:id");
     query->bindValue(":id", id);
     query->bindValue(":nom",nom);
     query->bindValue(":site", site);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"modifierItem", "Manager"));
 }
 void Manager::supprimerItem(int id)
     {
-        query->prepare("DELETE FROM ITEM WHERE id=:id");
+        query->prepare("DELETE FROM item WHERE id=:id");
         query->bindValue(":id", id);
-        query->exec();
+        std::cout<<q2c(sqlErreur(query,"supprimerItem", "Manager"));
     }
 
 

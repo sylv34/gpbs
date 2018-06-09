@@ -1,6 +1,6 @@
 #include "connexion.h"
 #include "ui_connexion.h"
-
+#define q2c(string) string.toStdString()
 Connexion::Connexion(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Connexion)
@@ -28,6 +28,7 @@ void Connexion::on_connexion_clicked()
         QMessageBox::critical(this, "DB", "Combinaison nom/mdp incorrect");
 
     }
+
 }
 
 void Connexion::on_quitter_clicked()

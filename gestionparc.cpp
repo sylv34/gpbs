@@ -52,18 +52,18 @@ void GestionParc::on_ajouter_clicked()
 
 void GestionParc::on_modifier_clicked()
 {
-   QItemSelectionModel *selection = ui->viewParc->selectionModel();
-   QModelIndexList selectionList = selection->selectedIndexes();
-   if(!selectionList.isEmpty()){
-       std::vector<QString> data;
-       foreach (QModelIndex index, selectionList)
-       {
-           data.push_back(index.data().toString());
-       }
-       ModificationDevice fenModif(data[0],data[1],data[2],data[3],data[4],data[5], data[6], data[7], data[8], data[9], this);
-       fenModif.exec();
-       afficherListe();
-   }else{
+    QItemSelectionModel *selection = ui->viewParc->selectionModel();
+    QModelIndexList selectionList = selection->selectedIndexes();
+    if(!selectionList.isEmpty()){
+        std::vector<QString> data;
+        foreach (QModelIndex index, selectionList)
+        {
+            data.push_back(index.data().toString());
+        }
+        ModificationDevice fenModif(data[0],data[1],data[2],data[3],data[4],data[5], data[6], data[7], data[8], data[9], this);
+        fenModif.exec();
+        afficherListe();
+    }else{
        QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour modification");
    }
 }

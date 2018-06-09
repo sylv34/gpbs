@@ -30,7 +30,6 @@ SOURCES += \
     gestionparc.cpp \
     ajoutdevice.cpp \
     modificationdevice.cpp \
-    gestionplanning.cpp \
     gestionsite.cpp \
     manager.cpp \
     gestionbudget.cpp \
@@ -45,7 +44,8 @@ SOURCES += \
     ffbudgetmanager.cpp \
     sitemanager.cpp \
     visusite.cpp \
-    ajoutsite.cpp
+    ajoutsite.cpp \
+    modifsite.cpp
 
 HEADERS += \
         gppbs.h \
@@ -53,7 +53,6 @@ HEADERS += \
     gestionparc.h \
     ajoutdevice.h \
     modificationdevice.h \
-    gestionplanning.h \
     gestionsite.h \
     manager.h \
     gestionbudget.h \
@@ -68,7 +67,8 @@ HEADERS += \
     ffbudgetmanager.h \
     sitemanager.h \
     visusite.h \
-    ajoutsite.h
+    ajoutsite.h \
+    modifsite.h
 
 FORMS += \
         gppbs.ui \
@@ -76,7 +76,6 @@ FORMS += \
     gestionparc.ui \
     ajoutdevice.ui \
     modificationdevice.ui \
-    gestionplanning.ui \
     gestionsite.ui \
     gestionbudget.ui \
     visubudget.ui \
@@ -85,4 +84,5 @@ FORMS += \
     ajoutinv.ui \
     modinv.ui \
     visusite.ui \
-    ajoutsite.ui
+    ajoutsite.ui \
+    modifsite.ui

@@ -2,6 +2,7 @@
 #define AJOUTSITE_H
 
 #include <QDialog>
+#include "sitemanager.h"
 
 namespace Ui {
 class AjoutSite;
@@ -15,8 +16,12 @@ public:
     explicit AjoutSite(QWidget *parent = 0);
     ~AjoutSite();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::AjoutSite *ui;
+    SiteManager *manager;
 };
 
 #endif // AJOUTSITE_H

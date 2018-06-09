@@ -10,13 +10,14 @@
 #include <QString>
 #include <QSqlError>
 
-class Manager
+class Manager : public QObject
 {
 public:
     Manager();
     bool etat_connexion();
     void connexionBase();
     bool verif_user(QString nom, QString mdp);
+    QString sqlErreur(QSqlQuery *query, QString methode, QString classe);
 
     void recupID(QString nomSite, QString nomType, QString nomUtilisation);
     int getId(QString table,QString nom);

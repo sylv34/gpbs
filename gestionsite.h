@@ -2,8 +2,9 @@
 #define GESTIONSITE_H
 
 #include <QDialog>
-#include "sitemanager.h"
 #include "visusite.h"
+#include "ajoutsite.h"
+#include "modifsite.h"
 
 namespace Ui {
 class GestionSite;
@@ -22,6 +23,10 @@ private slots:
     void on_detail_clicked();
 
     void on_ajouter_clicked();
+
+    void on_ajouter_2_clicked();
+
+    void on_modifier_clicked();
 
 private:
     Ui::GestionSite *ui;

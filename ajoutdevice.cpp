@@ -10,17 +10,17 @@ AjoutDevice::AjoutDevice(QWidget *parent) :
 {
     ui->setupUi(this);
     manager = new MaterielManager;
-    std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
+    std::vector<QString> combo=manager->remplissageCombo("libelle","type");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->typeAjout->addItem(*it);
        }
-    combo=manager->remplissageCombo("nom","SITE");
+    combo=manager->remplissageCombo("nom","site");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->siteAjout->addItem(*it);
        }
-    combo=manager->remplissageCombo("libelle","UTILISATION");
+    combo=manager->remplissageCombo("libelle","utilisation");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->utilisationAjout->addItem(*it);

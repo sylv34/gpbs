@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'gestionsite.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.0
+** Created by: Qt User Interface Compiler version 5.11.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -10,9 +10,7 @@
 #define UI_GESTIONSITE_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -36,6 +34,7 @@ public:
     QPushButton *detail;
     QSpacerItem *verticalSpacer_4;
     QPushButton *ajouter;
+    QPushButton *modifier;
     QSpacerItem *verticalSpacer;
     QPushButton *retour;
     QTableView *viewSite;
@@ -90,6 +89,11 @@ public:
 
         verticalLayout_2->addWidget(ajouter);
 
+        modifier = new QPushButton(GestionSite);
+        modifier->setObjectName(QStringLiteral("modifier"));
+
+        verticalLayout_2->addWidget(modifier);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_2->addItem(verticalSpacer);
@@ -126,6 +130,7 @@ public:
         labelBudget->setText(QApplication::translate("GestionSite", "GESTION DE SITE", nullptr));
         detail->setText(QApplication::translate("GestionSite", "D\303\251tails", nullptr));
         ajouter->setText(QApplication::translate("GestionSite", "Ajouter", nullptr));
+        modifier->setText(QApplication::translate("GestionSite", "Modifier", nullptr));
         retour->setText(QApplication::translate("GestionSite", "Retour", nullptr));
     } // retranslateUi
 

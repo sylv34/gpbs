@@ -1,5 +1,6 @@
 #include "materielmanager.h"
-
+#include <iostream>
+#define q2c(string) string.toStdString()
 
 MaterielManager::MaterielManager() : Manager(){}
 
@@ -7,12 +8,12 @@ void MaterielManager::liste_device(QStandardItemModel *model)
 {
     query->prepare("SELECT m.id, i.nom, t.libelle, m.fabriquant, m.modele, m.numSerie, m.ip, u.libelle, precisionUtilisation, s.nom, s.ville"
                   " FROM materiel m"
-                  " INNER JOIN ITEM i ON i.id=m.id"
-                  " INNER JOIN TYPE t ON m.id_TYPE=t.id"
-                  " INNER JOIN SITE s ON i.id_SITE= s.id"
-                  " INNER JOIN UTILISATION u ON m.id_UTILISATION=u.id"
+                  " INNER JOIN item i ON i.id=m.id"
+                  " INNER JOIN type t ON m.id_TYPE=t.id"
+                  " INNER JOIN site s ON i.id_SITE= s.id"
+                  " INNER JOIN utilisation u ON m.id_UTILISATION=u.id"
                   " ORDER BY id_TYPE");
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"liste_device", "MaterielManager"));
     int i(0);
     while (query->next()) {
         model->setItem(i,0,new QStandardItem(query->value(0).toString()));
@@ -43,14 +44,14 @@ void MaterielManager::ajouterItem(QString nom, int type, QString fabriquant, QSt
     query->bindValue(":ip", ip);
     query->bindValue(":utilisation", utilisation);
     query->bindValue(":precision", precision);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"ajouterItem", "MaterielManager"));
 }
 void MaterielManager::modifierItem(int id, QString nom, int type, QString fabriquant, QString modele, QString numSerie, QString ip, int utilisation, QString precision, int site)
 {
 
     Manager::modifierItem(id,nom,site);
 
-    query->prepare("UPDATE MATERIEL SET id_TYPE=:type, fabriquant=:fabriquant, modele=:modele, numserie=:num, ip=:ip, id_UTILISATION=:utilisation, precisionUtilisation=:precision WHERE id=:id;");
+    query->prepare("UPDATE materiel SET id_TYPE=:type, fabriquant=:fabriquant, modele=:modele, numserie=:num, ip=:ip, id_UTILISATION=:utilisation, precisionUtilisation=:precision WHERE id=:id;");
     query->bindValue(":fabriquant", fabriquant);
     query->bindValue(":modele", modele);
     query->bindValue(":num", numSerie);
@@ -59,5 +60,5 @@ void MaterielManager::modifierItem(int id, QString nom, int type, QString fabriq
     query->bindValue(":utilisation", utilisation);
     query->bindValue(":type", type);
     query->bindValue(":id", id);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"modifierItem", "MaterielManager"));
 }

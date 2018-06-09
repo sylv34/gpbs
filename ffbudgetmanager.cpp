@@ -1,25 +1,30 @@
 #include "ffbudgetmanager.h"
+#include <iostream>
+#define q2c(string) string.toStdString()
 
 FFBudgetManager::FFBudgetManager() : BudgetManager (){}
-void FFBudgetManager::ajouterItem(QString nom, double coutAnnuel, int frequence, int nature, QString commentaire, int site){
+
+
+void FFBudgetManager::ajouterItem(QString nom, double cout, int frequence, int nature, QString commentaire, int site){
 
     BudgetManager::ajouterItem(nom,site,commentaire,0);
 
-    query->prepare("INSERT INTO CHARGE values(@id_ITEM, :nature, :frequence, :coutAnnuel)");
+    double coutAnnuel = BudgetManager::coutAnnuel(cout,frequence);
+    query->prepare("INSERT INTO charge values(@id_ITEM, :nature, :frequence, :coutAnnuel)");
     query->bindValue(":nature",nature);
     query->bindValue(":frequence",frequence);
     query->bindValue(":coutAnnuel",coutAnnuel);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"ajouterItem", "FFBudgetManager"));
 }
-void FFBudgetManager::modifierItem(int id, QString nom, double coutAnnuel, int frequence, int nature, QString commentaire, int site){
+void FFBudgetManager::modifierItem(int id, QString nom, double cout, int frequence, int nature, QString commentaire, int site){
 
     BudgetManager::modifierItem(id,nom,site,commentaire);
-
-    query->prepare("UPDATE CHARGE SET id_nature=:nature, id_frequence=:frequence, coutAnnuel=:coutAnnuel "
+    double coutAnnuel = BudgetManager::coutAnnuel(cout,frequence);
+    query->prepare("UPDATE charge SET id_nature=:nature, id_frequence=:frequence, coutAnnuel=:coutAnnuel "
                    "WHERE id=:id");
     query->bindValue(":coutAnnuel",coutAnnuel);
     query->bindValue(":id", id);
     query->bindValue(":nature", nature);
     query->bindValue(":frequence", frequence);
-    query->exec();
+    std::cout<<q2c(sqlErreur(query,"modifierItem", "FFBudgetManager"));
 }

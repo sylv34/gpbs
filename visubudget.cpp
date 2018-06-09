@@ -55,12 +55,16 @@ void VisuBudget::on_modifierFF_clicked()
     QItemSelectionModel *selection = ui->viewFFDetails->selectionModel();
     QModelIndexList selectionList = selection->selectedIndexes();
     if(!selectionList.isEmpty()){
-        std::vector<QString> data;
+        std::vector<QVariant> data;
         foreach (QModelIndex index, selectionList)
         {
-            data.push_back(index.data().toString());
+            data.push_back(index.data());
         }
-        ModFF modifierFF(data[0].toInt(),data[0],data[1].toDouble(),data[2].toInt(),data[3].toInt(),data[4],site,this);
+        QString nom = manager->recupNom(data[0].toInt());
+        int frequence = manager->getId("frequence",data[2].toString());
+        int nature = manager->getId("nature",data[3].toString());
+        QMessageBox::information(this,"test",QString::number(manager->coutMensuel(data[1].toDouble(), data[0].toInt())));
+        ModFF modifierFF(data[0].toInt(),nom,manager->coutMensuel(data[1].toDouble(), data[0].toInt()),frequence,nature,data[4].toString(),site,this);
         modifierFF.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");
@@ -109,12 +113,14 @@ void VisuBudget::on_modifierInv_clicked()
     QItemSelectionModel *selection = ui->viewInvDetails->selectionModel();
     QModelIndexList selectionList = selection->selectedIndexes();
     if(!selectionList.isEmpty()){
-        std::vector<QString> data;
+        std::vector<QVariant> data;
         foreach (QModelIndex index, selectionList)
         {
             data.push_back(index.data().toString());
         }
-        ModInv modifierInv(data[0].toInt(),manager->recupNom(data[0].toInt()),data[1].toInt(),data[2].toInt(),data[3],site,this);
+        QString nom = manager->recupNom(data[0].toInt());
+        int nature = manager->getId("type",data[2].toString());
+        ModInv modifierInv(data[0].toInt(),nom,data[1].toInt(),nature,data[3].toString(),site,this);
         modifierInv.exec();
     }else{
         QMessageBox::warning(this,"Attention", "Séléctionnez une ligne pour visualisation");

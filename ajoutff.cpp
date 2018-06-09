@@ -16,12 +16,12 @@ AjoutFF::AjoutFF(int IdSite, QWidget *parent) :
     manager = new FFBudgetManager;
     site=IdSite;
 
-    std::vector<QString> combo=manager->remplissageCombo("libelle","FREQUENCE");
+    std::vector<QString> combo=manager->remplissageCombo("libelle","frequence");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->frequence->addItem(*it);
        }
-    combo=manager->remplissageCombo("libelle","NATURE");
+    combo=manager->remplissageCombo("libelle","nature");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->nature->addItem(*it);

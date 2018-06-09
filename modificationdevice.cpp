@@ -15,17 +15,17 @@ ModificationDevice::ModificationDevice(QString id, QString nom, QString nomType,
     ui->setupUi(this);
     manager = new MaterielManager;
 
-    std::vector<QString> combo=manager->remplissageCombo("libelle","TYPE");
+    std::vector<QString> combo=manager->remplissageCombo("libelle","type");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->typeMod->addItem(*it);
        }
-    combo=manager->remplissageCombo("nom","SITE");
+    combo=manager->remplissageCombo("nom","site");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->siteMod->addItem(*it);
        }
-    combo=manager->remplissageCombo("libelle","UTILISATION");
+    combo=manager->remplissageCombo("libelle","utilisation");
     for(std::vector<QString>::iterator it=combo.begin(); it!=combo.end(); ++it)
        {
            ui->utilisationMod->addItem(*it);
@@ -33,14 +33,14 @@ ModificationDevice::ModificationDevice(QString id, QString nom, QString nomType,
 
     ui->idMod->setText(id);
     ui->nomMod->setText(nom);
-    ui->typeMod->setCurrentIndex(manager->getId("TYPE", nomType));
+    ui->typeMod->setCurrentIndex(manager->getId("type", nomType));
     ui->fabriquantMod->setText(fabriquant);
     ui->modeleMod->setText(modele);
     ui->SNMod->setText(numSerie);
     ui->IPMod->setText(ip);
-    ui->utilisationMod->setCurrentIndex(manager->getId("UTILISATION",nomUtilisation));
+    ui->utilisationMod->setCurrentIndex(manager->getId("utilisation",nomUtilisation));
     ui->precisionMod->setText(precision);
-    ui->siteMod->setCurrentIndex(manager->getId("SITE",nomSite));
+    ui->siteMod->setCurrentIndex(manager->getId("site",nomSite));
 
 }
 
